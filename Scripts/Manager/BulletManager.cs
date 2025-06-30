@@ -165,10 +165,10 @@ public class BulletManager : Singleton<BulletManager>, IBulletManager, ICreateTo
     }
     public void Update_Mgr()
     {
-        float dt = Time.deltaTime;
+        float _fDt = Time.deltaTime;
 
-        moveSystem.Update(lisActiveBullet, dt);
-        objSystem.Update(lisActiveBullet, dt);
+        moveSystem.Update(lisActiveBullet, _fDt);
+        objSystem.Update(lisActiveBullet, _fDt);
         lifeTimeSystem.Update(lisActiveBullet);
         destroySystem.Update(lisActiveBullet);
     }

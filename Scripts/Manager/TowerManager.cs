@@ -89,6 +89,23 @@ public class TowerManager : Singleton<TowerManager>, ITowerManager
 
         lisActiveTower.Add(_tower);
     }
+    public void Upgrade_Tower(GameObject obj)
+    {
+        int _nTowerCount = 5;
+        for (int i = 0; i < arrBuildingPlace.Length; ++i)
+        {
+            if (arrBuildingPlace[i].Is_TowerObj(obj))
+            {
+                arrBuildingPlace[i].tower.Die();
+                dicTower[arrBuildingPlace[i].nIndex].Return(arrBuildingPlace[i].tower);
+
+                int _nIndex = UnityEngine.Random.Range(1, _nTowerCount + 1) + ((arrBuildingPlace[i].nLevel) * _nTowerCount);
+                Create_Tower(_nIndex, arrBuildingPlace[i]);
+
+                return;
+            }
+        }
+    }
     public int Get_Level(GameObject obj)
     {
         for (int i = 0; i < arrBuildingPlace.Length; ++i)
@@ -99,23 +116,6 @@ public class TowerManager : Singleton<TowerManager>, ITowerManager
             }
         }
         return 0;
-    }
-
-    public void Upgrade_Tower(GameObject obj)
-    {
-        for (int i = 0; i < arrBuildingPlace.Length; ++i)
-        {
-            if (arrBuildingPlace[i].Is_TowerObj(obj))
-            {
-                arrBuildingPlace[i].tower.Die();
-                dicTower[arrBuildingPlace[i].nIndex].Return(arrBuildingPlace[i].tower);
-
-                int _nIndex = UnityEngine.Random.Range(1, 6) + ((arrBuildingPlace[i].nLevel) * 5);
-                Create_Tower(_nIndex, arrBuildingPlace[i]);
-
-                return;
-            }
-        }
     }
 
     public void Destroy_Tower(GameObject obj)
